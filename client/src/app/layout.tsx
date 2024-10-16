@@ -7,9 +7,10 @@ import Navbar from "./components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "thirdweb SDK + Next starter",
+  title: "Vishwapreneur",
   description:
-    "Starter template for using thirdweb SDK with Next.js App router",
+    "Empowering Innovation, One Project at a Time",
+ 
 };
 
 export default function RootLayout({
@@ -19,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+        <head>
+        <link rel="icon" href="/vit.png" />
+      </head>
       <body className="bg-slate-100 text-slate-700">
         <ThirdwebProvider>
           <Navbar />  

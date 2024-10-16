@@ -121,7 +121,7 @@ export default function CampaignPage() {
             </div>
             {!isPendingBalance && (
                 <div className="mb-4">
-                    <p className="text-lg font-semibold">Campaign Goal: ${goal?.toString()}</p>
+                    <p className="text-lg font-semibold">Project Goal: ${goal?.toString()}</p>
                     <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
                         <div className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right" style={{ width: `${balancePercentage?.toString()}%`}}>
                             <p className="text-white dark:text-white text-xs p-1">${balance?.toString()}</p>

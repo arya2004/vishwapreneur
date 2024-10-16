@@ -1,7 +1,7 @@
 'use client';
 import Image from "next/image";
 import { client } from "@/app/client";
-import thirdwebIcon from "@public/thirdweb.svg";
+import vit from "@public/vit.png";
 import Link from "next/link";
 import { ConnectButton, lightTheme, useActiveAccount } from "thirdweb/react";
 
@@ -53,8 +53,8 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <Image
-                src={thirdwebIcon}
-                alt="Your Company"
+                src={vit}
+                alt="VIT Pune"
                 width={32}
                 height={32}
                 style={{
@@ -66,7 +66,7 @@ const Navbar = () => {
               <div className="flex space-x-4">
                 <Link href={"/"}>
                   <p className="rounded-md px-3 py-2 text-sm font-medium text-slate-700">
-                    Campaigns
+                    EDI Projects
                   </p>
                 </Link>
                 {account && (
