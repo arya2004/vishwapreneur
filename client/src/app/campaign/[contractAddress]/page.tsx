@@ -10,7 +10,6 @@ import { lightTheme, TransactionButton, useActiveAccount, useReadContract } from
 
 export default function CampaignPage() {
     
-   
     const account = useActiveAccount();
     const { contractAddress } = useParams();
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -20,7 +19,7 @@ export default function CampaignPage() {
         client: client,
         chain: sepolia,
         address: contractAddress as string,
-    })
+    });
 
     const {data: campaignName, isLoading: isPendingName} = useReadContract({
         contract,
@@ -55,18 +54,14 @@ export default function CampaignPage() {
     const deadlineDate = new Date(parseInt(deadline?.toString() as string) * 1000);
     const deadlineDatePassed = deadlineDate < new Date();
 
-
-
-     // Calulate the total funded balance percentage
-     const totalBalance = balance?.toString();
-     const totalGoal = goal?.toString();
-     let balancePercentage = (parseInt(totalBalance as string) / parseInt(totalGoal as string)) * 100;
+    // Calculate the total funded balance percentage
+    const totalBalance = balance?.toString();
+    const totalGoal = goal?.toString();
+    let balancePercentage = (parseInt(totalBalance as string) / parseInt(totalGoal as string)) * 100;
  
-     // If balance is greater than or equal to goal, percentage should be 100
     if (balancePercentage >= 100) {
          balancePercentage = 100;
     }
-
 
     const { data: tiers, isPending: isPendingTiers } = useReadContract({
         contract,
@@ -74,28 +69,28 @@ export default function CampaignPage() {
         params: []
       });
 
-      const { data: owner, isPending: isPendingOwner } = useReadContract({
+    const { data: owner, isPending: isPendingOwner } = useReadContract({
         contract,
         method: "function owner() view returns (address)",
         params: []
       });
     
-      const { data: status } = useReadContract({
+    const { data: status } = useReadContract({
         contract,
         method: "function state() view returns (uint8)",
         params: []
       });
     
     return (
-        <div className="mx-auto max-w-7xl px-2 mt-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl text-center justify-center px-2 mt-4 sm:px-6 lg:px-8 text-white">
             <div className="flex flex-row justify-between items-center">
                 {!isPendingName && (
-                    <p className="text-4xl font-semibold">{campaignName}</p>
+                    <p className="text-5xl font-semibold">{campaignName}</p>
                 )}
                 {owner === account?.address && (
                     <div className="flex flex-row">
                         {isEditing && (
-                            <p className="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">
+                            <p className="px-4 py-2 bg-gray-500 text-white rounded-md mr-2 text-lg">
                                 Status:  
                                 {status === 0 ? " Active" : 
                                 status === 1 ? " Successful" :
@@ -103,41 +98,38 @@ export default function CampaignPage() {
                             </p>
                         )}
                         <button
-                            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                            className="px-4 py-2 bg-blue-500 text-white rounded-md text-lg"
                             onClick={() => setIsEditing(!isEditing)}
                         >{isEditing ? "Done" : "Edit"}</button>
                     </div>
                 )}
             </div>
             <div className="my-4">
-                <p className="text-lg font-semibold">Description:</p>
-                <p>{campaignDescription}</p>
+                <p className="text-2xl font-semibold">Disaster Impact:</p>
+                <p className="text-lg">{campaignDescription}</p>
             </div>
             <div className="mb-4">
-                <p className="text-lg font-semibold">Deadline</p>
+                <p className="text-2xl font-semibold">Deadline</p>
                 {!isPendingDeadline && (
-                    <p>{deadlineDate.toDateString()}</p>
+                    <p className="text-lg">{deadlineDate.toDateString()}</p>
                 )}
             </div>
             {!isPendingBalance && (
                 <div className="mb-4">
-                    <p className="text-lg font-semibold">Project Goal: ${goal?.toString()}</p>
-                    <div className="relative w-full h-6 bg-gray-200 rounded-full dark:bg-gray-700">
+                    <p className="text-2xl font-semibold">Our Funding Goal: ${goal?.toString()}</p>
+                    <div >
                         <div className="h-6 bg-blue-600 rounded-full dark:bg-blue-500 text-right" style={{ width: `${balancePercentage?.toString()}%`}}>
-                            <p className="text-white dark:text-white text-xs p-1">${balance?.toString()}</p>
+                            <p className="text-white text-xl dark:text-white text-xs p-1">${balance?.toString()}</p>
                         </div>
-                        <p className="absolute top-0 right-0 text-white dark:text-white text-xs p-1">
-                            {balancePercentage >= 100 ? "" : `${balancePercentage?.toString()}%`}
-                        </p>
+                        
                     </div>
                 </div>
-                
             )}
             <div>
-                <p className="text-lg font-semibold">Tiers:</p>
+                <p className="text-2xl font-semibold">Let's make a contribution:</p>
                 <div className="grid grid-cols-3 gap-4">
                     {isPendingTiers ? (
-                        <p >Loading...</p>
+                        <p className="text-lg">Loading...</p>
                     ) : (
                         tiers && tiers.length > 0 ? (
                             tiers.map((tier, index) => (
@@ -151,16 +143,17 @@ export default function CampaignPage() {
                             ))
                         ) : (
                             !isEditing && (
-                                <p>No tiers available</p>
+                                <p className="text-lg">No contribution limits added</p>
                             )
                         )
                     )}
                     {isEditing && (
-                        // Add a button card with text centered in the middle
                         <button
-                            className="max-w-sm flex flex-col text-center justify-center items-center font-semibold p-6 bg-blue-500 text-white border border-slate-100 rounded-lg shadow"
-                            onClick={() => setIsModalOpen(true)}
-                        >+ Add Tier</button>
+                        className="w-1/4 h-1/4 flex flex-col text-center justify-center items-center font-semibold p-2 bg-green-600 text-white border border-green-700 rounded-md shadow hover:bg-green-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-300 transition-transform duration-150 ease-in-out text-sm"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        + Add Contributions
+                    </button>
                     )}
                 </div>
             </div>
@@ -190,14 +183,14 @@ const CreateCampaignModal = (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center backdrop-blur-md">
             <div className="w-1/2 bg-slate-100 p-6 rounded-md">
                 <div className="flex justify-between items-center mb-4">
-                    <p className="text-lg font-semibold">Create a Funding Tier</p>
+                    <p className="text-lg font-semibold">Create a Contribution</p>
                     <button
                         className="text-sm px-4 py-2 bg-slate-600 text-white rounded-md"
                         onClick={() => setIsModalOpen(false)}
                     >Close</button>
                 </div>
-                <div className="flex flex-col">
-                    <label>Tier Name:</label>
+                <div className="flex text-black flex-col">
+                    <label>Name:</label>
                     <input 
                         type="text" 
                         value={tierName}
@@ -205,7 +198,7 @@ const CreateCampaignModal = (
                         placeholder="Tier Name"
                         className="mb-4 px-4 py-2 bg-slate-200 rounded-md"
                     />
-                    <label>Tier Cost:</label>
+                    <label>Cost:</label>
                     <input 
                         type="number"
                         value={parseInt(tierAmount.toString())}
@@ -224,7 +217,7 @@ const CreateCampaignModal = (
                         }}
                         onError={(error) => alert(`Error: ${error.message}`)}
                         theme={lightTheme()}
-                    >Add Tier</TransactionButton>
+                    >Add Contribution</TransactionButton>
                 </div>
             </div>
         </div>

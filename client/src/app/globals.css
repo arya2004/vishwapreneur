@@ -18,5 +18,9 @@
 @layer base {
 	body {
 		@apply bg-zinc-950 text-neutral-200;
+		background-image: url('/img1.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
 	}
 }

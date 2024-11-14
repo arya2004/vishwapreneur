@@ -7,9 +7,7 @@ import { CROWDFUNDING_FACTORY } from "./constants/contracts";
 import { useReadContract } from "thirdweb/react";
 import CampaignCard from "./components/CampaignCard";
 
-
 export default function Home() {
-
   const contract = getContract({
     client: client,
     chain: sepolia,
@@ -23,28 +21,27 @@ export default function Home() {
   });
 
   console.log(campaigns);
-  
-
 
   return (
-    <main className="mx-auto max-w-7xl px-4 mt-4 sm:px-6 lg:px-8">
-    <div className="py-10">
-      <h1 className="text-4xl font-bold mb-4">Recent EDI Projects:</h1>
-      <div className="grid grid-cols-3 gap-4">
-        {!isPending && campaigns && (
-          campaigns.length > 0 ? (
-            campaigns.map((campaign) => (
-              <CampaignCard
-                key={campaign.campaignAddress}
-                campaignAddress={campaign.campaignAddress}
-              />
-            ))
-          ) : (
-            <p>No Projects</p>
-          )
-        )}
+    <main className="mx-auto max-w-7xl px-4 mt-4 sm:px-6 lg:px-8 bg-[url('/img1.jpeg')] bg-cover bg-center min-h-screen">
+      <div className="py-10">
+        <h1 className="text-4xl text-black font-bold mb-4">Recent Disaster Fundings:</h1>
+        <div className="grid grid-cols-3 gap-4">
+          {!isPending && campaigns && (
+            campaigns.length > 0 ? (
+              
+              campaigns.slice(7).map((campaign) => (
+                <CampaignCard
+                  key={campaign.campaignAddress}
+                  campaignAddress={campaign.campaignAddress}
+                />
+              ))
+            ) : (
+              <p>Projects not available</p>
+            )
+          )}
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
   );
 }

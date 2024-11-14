@@ -8,13 +8,13 @@ import { ConnectButton, lightTheme, useActiveAccount } from "thirdweb/react";
 const Navbar = () => {
   const account = useActiveAccount();
   return (
-    <nav className="bg-slate-100 border-b-2 border-b-slate-300">
+    <nav className="bg-gray-900 border-b-2 border-b-gray-700 font-sans">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button
               type="button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -65,14 +65,14 @@ const Navbar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 <Link href={"/"}>
-                  <p className="rounded-md px-3 py-2 text-sm font-medium text-slate-700">
-                    EDI Projects
+                  <p className="rounded-md px-3 py-2 items-center justify-center text-sm font-medium text-gray-300 hover:text-white">
+                    Campaigns
                   </p>
                 </Link>
                 {account && (
                   <Link href={`/dashboard/${account?.address}`}>
-                    <p className="rounded-md px-3 py-2 text-sm font-medium text-slate-700">
-                      Dashboard
+                    <p className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">
+                      Current Fundings
                     </p>
                   </Link>
                 )}

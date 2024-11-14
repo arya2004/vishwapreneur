@@ -31,14 +31,14 @@ export default function DashboardPage() {
     
     return (
         <div className="mx-auto max-w-7xl px-4 mt-16 sm:px-6 lg:px-8">
-            <div className="flex flex-row justify-between items-center mb-8">
+            <div className="flex text-white flex-row justify-between items-center mb-8">
                 <p className="text-4xl font-semibold">Dashboard</p>
                 <button
                     className="px-4 py-2 bg-blue-500 text-white rounded-md"
                     onClick={() => setIsModalOpen(true)}
-                >Register EDI Project</button>
+                >Add Contribution Need</button>
             </div>
-            <p className="text-2xl font-semibold mb-4">My EDI Projects:</p>
+            <p className="text-2xl text-white font-semibold mb-4">Active Funding Campaigns:</p>
             <div className="grid grid-cols-3 gap-4">
                 {!isLoadingMyCampaigns && (
                     myCampaigns && myCampaigns.length > 0 ? (
@@ -49,7 +49,7 @@ export default function DashboardPage() {
                             />
                         ))
                     ) : (
-                        <p>No Projects</p>
+                        <p>No Campaigns added yet</p>
                     )
                 )}
             </div>
@@ -128,14 +128,14 @@ const CreateCampaignModal = (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center backdrop-blur-md">
             <div className="w-1/2 bg-slate-100 p-6 rounded-md">
                 <div className="flex justify-between items-center mb-4">
-                    <p className="text-lg font-semibold">Register an EDI Project</p>
+                    <p className="text-lg font-semibold">Add Disaster</p>
                     <button
                         className="text-sm px-4 py-2 bg-slate-600 text-white rounded-md"
                         onClick={() => setIsModalOpen(false)}
                     >Close</button>
                 </div>
                 <div className="flex flex-col">
-                    <label>Project Title:</label>
+                    <label>Disaster Name:</label>
                     <input 
                         type="text" 
                         value={campaignName}
@@ -143,7 +143,7 @@ const CreateCampaignModal = (
                         placeholder="Project Title"
                         className="mb-4 px-4 py-2 bg-slate-300 rounded-md"
                     />
-                    <label>Project Description:</label>
+                    <label>Disaster Description:</label>
                     <textarea
                         value={campaignDescription}
                         onChange={(e) => setCampaignDescription(e.target.value)}
@@ -171,7 +171,7 @@ const CreateCampaignModal = (
                         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
                         onClick={handleDeployContract}
                     >{
-                        isDeployingContract ? "Registering Project..." : "Register Project"
+                        isDeployingContract ? "Disaster Added..." : "Add Disaster"
                     }</button>
                     
                 </div>

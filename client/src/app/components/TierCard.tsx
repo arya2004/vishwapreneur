@@ -10,21 +10,21 @@ type Tier = {
 type TierCardProps = {
     tier: Tier;
     index: number;
-    contract: ThirdwebContract
+    contract: ThirdwebContract;
     isEditing: boolean;
-}
+};
 
 export const TierCard: React.FC<TierCardProps> = ({ tier, index, contract, isEditing }) => {
     return (
-        <div className="max-w-sm flex flex-col justify-between p-6 bg-white border border-slate-100 rounded-lg shadow">
+        <div className="max-w-sm flex flex-col justify-between p-6 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
             <div>
                 <div className="flex flex-row justify-between items-center">
-                    <p className="text-2xl font-semibold">{tier.name}</p>
-                    <p className="text-2xl font-semibold">${tier.amount.toString()}</p>
+                    <p className="text-2xl font-semibold text-gray-100">{tier.name}</p>
+                    <p className="text-2xl font-semibold text-gray-100">${tier.amount.toString()}</p>
                 </div>
             </div>
-            <div className="flex flex-row justify-between items-end">
-                <p className="text-xs font-semibold">Total Backers: {tier.backers.toString()}</p>
+            <div className="flex flex-row justify-between items-end mt-4">
+                <p className="text-xs font-semibold text-gray-400">Donators: {tier.backers.toString()}</p>
                 <TransactionButton
                     transaction={() => prepareContractCall({
                         contract: contract,
@@ -36,13 +36,15 @@ export const TierCard: React.FC<TierCardProps> = ({ tier, index, contract, isEdi
                     onTransactionConfirmed={async () => alert("Funded successfully!")}
                     style={{
                         marginTop: "1rem",
-                        backgroundColor: "#2563EB",
+                        backgroundColor: "#1D4ED8",
                         color: "white",
                         padding: "0.5rem 1rem",
                         borderRadius: "0.375rem",
                         cursor: "pointer",
                     }}
-                >Select</TransactionButton>
+                >
+                    Select
+                </TransactionButton>
             </div>
             {isEditing && (
                 <TransactionButton
@@ -61,8 +63,10 @@ export const TierCard: React.FC<TierCardProps> = ({ tier, index, contract, isEdi
                         borderRadius: "0.375rem",
                         cursor: "pointer",
                     }}
-                >Remove</TransactionButton>
+                >
+                    Remove
+                </TransactionButton>
             )}
         </div>
-    )
+    );
 };
